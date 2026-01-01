@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Nightclub Color System */
+    --background: 0 0% 4%; /* #0A0A0A - Deep backstage black */
+    --foreground: 0 0% 100%; /* Pure white */
+    
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 100%;
+    
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 100%;
+    
+    /* Neon Magenta Primary */
+    --primary: 330 100% 45%; /* #E4007E */
+    --primary-foreground: 0 0% 100%;
+    
+    /* Electric Cyan Secondary */
+    --secondary: 185 88% 56%; /* #27E8F4 */
+    --secondary-foreground: 0 0% 4%;
+    
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+    
+    --accent: 185 88% 56%;
+    --accent-foreground: 0 0% 4%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 330 100% 45%;
+    
+    --radius: 0.5rem;
+    
+    /* Custom Neon Variables */
+    --neon-magenta: 330 100% 45%;
+    --neon-cyan: 185 88% 56%;
+    --neon-glow-magenta: 0 0 20px hsl(330 100% 45% / 0.6), 0 0 40px hsl(330 100% 45% / 0.4), 0 0 60px hsl(330 100% 45% / 0.2);
+    --neon-glow-cyan: 0 0 20px hsl(185 88% 56% / 0.6), 0 0 40px hsl(185 88% 56% / 0.4), 0 0 60px hsl(185 88% 56% / 0.2);
+    
+    /* Typography */
+    --font-heading: 'Bebas Neue', 'Anton', sans-serif;
+    --font-body: 'Inter', 'Montserrat', sans-serif;
+    
+    /* Sidebar - keeping for compatibility */
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 330 100% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 185 88% 56%;
+    --sidebar-accent-foreground: 0 0% 4%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 330 100% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer components {
+  /* Neon Glow Effects */
+  .neon-magenta {
+    text-shadow: var(--neon-glow-magenta);
+  }
+  
+  .neon-cyan {
+    text-shadow: var(--neon-glow-cyan);
+  }
+  
+  .neon-border-magenta {
+    box-shadow: var(--neon-glow-magenta);
+  }
+  
+  .neon-border-cyan {
+    box-shadow: var(--neon-glow-cyan);
+  }
+  
+  /* Button Variants */
+  .btn-neon-magenta {
+    @apply relative overflow-hidden bg-primary text-primary-foreground font-heading tracking-wider px-8 py-4 text-lg uppercase;
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.5), inset 0 0 20px hsl(var(--primary) / 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-neon-magenta:hover {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.8), 0 0 60px hsl(var(--primary) / 0.4), inset 0 0 30px hsl(var(--primary) / 0.2);
+    transform: scale(1.02);
+  }
+  
+  .btn-ghost-glitch {
+    @apply relative border border-foreground/30 bg-transparent text-foreground font-heading tracking-wider px-8 py-4 text-lg uppercase;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-ghost-glitch:hover {
+    @apply border-secondary text-secondary;
+    text-shadow: var(--neon-glow-cyan);
+  }
+  
+  /* Gradient Backgrounds */
+  .gradient-radial-stage {
+    background: radial-gradient(ellipse at center bottom, hsl(var(--primary) / 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at center top, hsl(var(--secondary) / 0.1) 0%, transparent 40%),
+                hsl(var(--background));
+  }
+  
+  .gradient-mesh {
+    background: 
+      radial-gradient(at 40% 20%, hsl(var(--primary) / 0.1) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, hsl(var(--secondary) / 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsl(var(--primary) / 0.05) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, hsl(var(--secondary) / 0.05) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsl(var(--primary) / 0.1) 0px, transparent 50%),
+      hsl(var(--background));
+  }
+  
+  /* Separator Styles */
+  .separator-dj {
+    @apply relative w-full py-8 flex items-center justify-center text-muted-foreground text-sm tracking-widest;
+  }
+  
+  .separator-dj::before,
+  .separator-dj::after {
+    content: '';
+    @apply flex-1 h-px bg-gradient-to-r from-transparent via-muted-foreground/30 to-transparent;
+  }
+  
+  /* Card Styles */
+  .card-glass {
+    @apply relative bg-card/50 backdrop-blur-md border border-border/50;
+    background: linear-gradient(135deg, hsl(var(--card) / 0.8) 0%, hsl(var(--card) / 0.4) 100%);
+  }
+  
+  /* Marquee */
+  .marquee-track {
+    animation: marquee 30s linear infinite;
+  }
+  
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+  
+  /* Glitch Animation */
+  .glitch-text {
+    position: relative;
+  }
+  
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .glitch-text::before {
+    animation: glitch-1 0.3s infinite linear alternate-reverse;
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+    color: hsl(var(--secondary));
+  }
+  
+  .glitch-text::after {
+    animation: glitch-2 0.3s infinite linear alternate-reverse;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    color: hsl(var(--primary));
+  }
+  
+  /* Scroll Indicator */
+  .scroll-indicator {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+  
+  /* Progress Bar Glow */
+  .progress-glow {
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.8), 0 0 20px hsl(var(--primary) / 0.4);
+  }
+}
+
+@layer utilities {
+  .text-gradient-neon {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+  }
+  
+  .border-gradient-neon {
+    border-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary))) 1;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes glitch-1 {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-1px); }
+  80% { transform: translateX(1px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes glitch-2 {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(2px); }
+  40% { transform: translateX(-2px); }
+  60% { transform: translateX(1px); }
+  80% { transform: translateX(-1px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes pulse-neon {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.8), 0 0 60px hsl(var(--primary) / 0.4);
+  }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+  75% { opacity: 0.95; }
+}
+
+/* Animated Gradient Border for DJ Skills Cards */
+@keyframes gradient-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Grain Texture */
+.skill-card-grain::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: 18px;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+/* Neon Animated Border Container */
+.skill-card-wrapper {
+  position: relative;
+  border-radius: 18px;
+  padding: 3px;
+  background: linear-gradient(
+    45deg,
+    #F000FF,
+    #4A00FF,
+    #00E5FF,
+    #FF0099,
+    #F000FF
+  );
+  background-size: 300% 300%;
+  animation: gradient-border 4s ease infinite;
+}
+
+.skill-card-inner {
+  position: relative;
+  background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(17, 17, 17, 0.95) 100%);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-card-wrapper:hover .skill-card-inner {
+  transform: scale(1.03) rotate(1deg);
+  box-shadow: 
+    0 0 30px rgba(240, 0, 255, 0.6),
+    0 0 60px rgba(74, 0, 255, 0.4),
+    0 0 90px rgba(0, 229, 255, 0.2);
+}
+
+.skill-card-wrapper:hover {
+  filter: brightness(1.1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--secondary)));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
